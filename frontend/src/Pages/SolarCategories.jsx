@@ -1,53 +1,82 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+"use client"
+import { useNavigate } from "react-router-dom"
+import { motion } from "framer-motion"
+import SEOHead from "../components/SEO/SEOHead"
+import ProductCard from "../components/ui/Card/ProductCard"
 
 const solarCategories = [
-  { id: "panel", name: "Solar Panel", image: "/images/panel.png" },
-  { id: "inverter", name: "Inverter", image: "/images/inverter.png" },
-  { id: "battery", name: "Batteries", image: "/images/battery.png" },
-];
+  {
+    id: "panel",
+    name: "Solar Panels",
+    image: "/images/panel.png",
+    description: "High-efficiency solar panels to convert sunlight into clean energy",
+  },
+  {
+    id: "inverter",
+    name: "Inverters",
+    image: "/images/inverter.png",
+    description: "Convert DC electricity from solar panels into AC for home use",
+  },
+  {
+    id: "battery",
+    name: "Batteries",
+    image: "/images/battery.png",
+    description: "Store excess solar energy for use when the sun isn't shining",
+  },
+]
 
 const SolarCategories = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleClick = (id) => {
-    navigate(`/solar-categories/${id}`);
-  };
+    navigate(`/solar-categories/${id}`)
+  }
 
   return (
-    <section className="pt-28 px-6 md:px-16 bg-white min-h-screen">
-      <motion.h2
-        className="text-4xl font-bold mb-10 text-center"
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        Our Solar Products
-      </motion.h2>
+    <>
+      <SEOHead
+        title="Solar Products"
+        description="Explore our complete range of solar energy products including high-efficiency solar panels, inverters, and batteries for sustainable energy solutions."
+        canonicalUrl="/solar-brands"
+      />
 
-      <div className="grid md:grid-cols-3 gap-8">
-        {solarCategories.map((cat, index) => (
-          <motion.div
-            key={cat.id}
-            className="bg-gray-100 rounded-3xl p-6 flex flex-col items-center shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2, duration: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            onClick={() => handleClick(cat.id)}
-          >
-            <img
-              src={cat.image}
-              alt={cat.name}
-              className="w-40 h-40 object-contain mb-4"
-            />
-            <h3 className="text-xl font-semibold">{cat.name}</h3>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-};
+      <section className="pt-28 pb-20 px-6 md:px-16 bg-gradient-to-b from-white to-gray-50 min-h-screen">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <motion.h1
+              className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-blue-600"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Solar Energy Products
+            </motion.h1>
+            <motion.p
+              className="text-gray-600 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Harness the power of the sun with our high-quality solar energy solutions. Sustainable, efficient, and
+              built to last.
+            </motion.p>
+          </div>
 
-export default SolarCategories;
+          <div className="grid md:grid-cols-3 gap-8">
+            {solarCategories.map((cat, index) => (
+              <ProductCard
+                key={cat.id}
+                image={cat.image}
+                name={cat.name}
+                onClick={() => handleClick(cat.id)}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
+
+export default SolarCategories

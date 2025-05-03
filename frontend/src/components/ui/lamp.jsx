@@ -1,7 +1,6 @@
-"use client";
-import React from "react";
-import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+"use client"
+import { motion } from "motion/react"
+import { cn } from "@/lib/utils"
 
 export function LampDemo() {
   return (
@@ -19,7 +18,7 @@ export function LampDemo() {
         Build lamps <br /> the right way
       </motion.h1>
     </LampContainer>
-  );
+  )
 }
 
 export const LampContainer = ({ children, className }) => {
@@ -27,7 +26,7 @@ export const LampContainer = ({ children, className }) => {
     <div
       className={cn(
         "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full z-0",
-        className
+        className,
       )}
     >
       <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
@@ -89,9 +88,7 @@ export const LampContainer = ({ children, className }) => {
 
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>
       </div>
-      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
-        {children}
-      </div>
+      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">{children}</div>
     </div>
-  );
-};
+  )
+}

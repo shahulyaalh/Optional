@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,6 +10,7 @@ import {
 } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { registerSW } from "virtual:pwa-register";
+import { HelmetProvider } from "react-helmet-async";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -15,7 +18,6 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Loader from "./components/Loader/Loader";
 import LogoLoader from "./components/ui/Intro/LogoLoader";
-import Slogan from "./components/ui/Intro/Slogan"; // ✅ Import Slogan component
 import Contact from "./Pages/Contact";
 import Products from "./Pages/Products";
 import Gallery from "./Pages/Gallery";
@@ -136,32 +138,18 @@ const App = () => {
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
-  // useEffect(() => {
-  //   if (!showLogoLoader && !showSlogan && deferredPrompt) {
-  //     setTimeout(() => {
-  //       deferredPrompt.prompt();
-  //       deferredPrompt.userChoice.then((choiceResult) => {
-  //         if (choiceResult.outcome === "accepted") {
-  //           console.log("User accepted the install prompt");
-  //         } else {
-  //           console.log("User dismissed the install prompt");
-  //         }
-  //         setDeferredPrompt(null);
-  //       });
-  //     }, 1000);
-  //   }
-  // }, [showLogoLoader, showSlogan, deferredPrompt]);
-
   return (
-    <Router basename="/">
-      {showLogoLoader ? (
-        <LogoLoader onComplete={() => setShowLogoLoader(false)} />
-      ) : showSlogan ? (
-        <SparklesPreview />
-      ) : (
-        <AppContent />
-      )}
-    </Router>
+    <HelmetProvider>
+      <Router basename="/">
+        {showLogoLoader ? (
+          <LogoLoader onComplete={() => setShowLogoLoader(false)} />
+        ) : showSlogan ? (
+          <SparklesPreview />
+        ) : (
+          <AppContent />
+        )}
+      </Router>
+    </HelmetProvider>
   );
 };
 
