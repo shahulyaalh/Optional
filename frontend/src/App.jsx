@@ -34,7 +34,7 @@ const ProtectedRoute = ({ children }) => {
   return token ? children : <Navigate to="/admin-login" replace />;
 };
 
-const AppContent = () => {
+const AppContent = ({ theme, toggleTheme }) => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
 
@@ -43,6 +43,13 @@ const AppContent = () => {
     const timeout = setTimeout(() => setLoading(false), 1200);
     return () => clearTimeout(timeout);
   }, [location]);
+
+  useEffect(() => {
+    // Apply theme to body class
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   if (loading) {
     return (
@@ -61,7 +68,7 @@ const AppContent = () => {
 
   return (
     <>
-      <Header />
+      <Header toggleTheme={toggleTheme} theme={theme} />
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
@@ -106,15 +113,8 @@ const App = () => {
   const [showLogoLoader, setShowLogoLoader] = useState(true);
   const [showSlogan, setShowSlogan] = useState(false);
 
-  useEffect(() => {
-    const updateSW = registerSW({
-      onNeedRefresh() {
-        if (confirm("New version available. Refresh now?")) {
-          updateSW(true);
-        }
-      },
-    });
-  }, []);
+  // Theme state (light/dark) with persistence via localStorage
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
     if (!showLogoLoader) {
@@ -126,6 +126,23 @@ const App = () => {
       return () => clearTimeout(timer);
     }
   }, [showLogoLoader]);
+
+  // Service Worker Registration (PWA)
+  useEffect(() => {
+    const updateSW = registerSW({
+      onNeedRefresh() {
+        if (confirm("New version available. Refresh now?")) {
+          updateSW(true);
+        }
+      },
+    });
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme); // Store theme in localStorage
+  };
 
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
@@ -146,7 +163,7 @@ const App = () => {
         ) : showSlogan ? (
           <SparklesPreview />
         ) : (
-          <AppContent />
+          <AppContent theme={theme} toggleTheme={toggleTheme} />
         )}
       </Router>
     </HelmetProvider>

@@ -1,17 +1,21 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useNavigate } from "react-router-dom"
-import Button from "../ui/Button"
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import Button from "../ui/Button";
 
 const HeroSection = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
-    <div className="relative w-full h-[90vh] overflow-hidden">
+    <div className="relative w-full min-h-screen overflow-hidden pt-[64px]">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img src="/hero-bg.jpeg" alt="Solar panels and security cameras" className="w-full h-full object-cover" />
+        <img
+          src="/hero-bg.jpeg"
+          alt="Solar panels and security cameras"
+          className="w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10"></div>
       </div>
 
@@ -29,7 +33,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Harness the Sun. <span className="text-blue-400">Secure</span> your World.
+            Harness the Sun. <span className="text-blue-400">Secure</span> your
+            World.
           </motion.h1>
 
           <motion.p
@@ -38,7 +43,8 @@ const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            With Stair Ecosystem, power your space sustainably and protect what matters most – all under one roof.
+            With Stair Ecosystem, power your space sustainably and protect what
+            matters most – all under one roof.
           </motion.p>
 
           <motion.div
@@ -71,7 +77,12 @@ const HeroSection = () => {
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.8, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+          transition={{
+            delay: 1,
+            duration: 0.8,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "reverse",
+          }}
         >
           <div className="w-6 h-10 rounded-full border-2 border-white flex justify-center">
             <motion.div
@@ -83,7 +94,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;

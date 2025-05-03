@@ -10,3 +10,17 @@
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
 }
+
+/* App.css */
+
+/* Light Theme */
+.light {
+  background-color: white;
+  color: black;
+}
+
+/* Dark Theme */
+.dark {
+  background-color: #333;
+  color: white;
+}

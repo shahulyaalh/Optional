@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import AOS from "aos"
-import "aos/dist/aos.css"
-import { Helmet } from "react-helmet-async"
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Helmet } from "react-helmet-async";
 
-import HeroSection from "../components/Home/HeroSection"
-import AboutSection from "../components/Home/AboutSection"
-import WhyChooseUs from "../components/Home/WhyChooseUs"
-import ProductsShowcase from "../components/Home/ProductsShowcase"
-import TestimonialsSection from "../components/Home/TestimonialsSection"
-import BrandsSection from "../components/Home/BrandsSection"
-import CtaSection from "../components/Home/CtaSection"
+import HeroSection from "../components/Home/HeroSection";
+import AboutSection from "../components/Home/AboutSection";
+import WhyChooseUs from "../components/Home/WhyChooseUs";
+import ProductsShowcase from "../components/Home/ProductsShowcase";
+import TestimonialsSection from "../components/Home/TestimonialsSection";
+import BrandsSection from "../components/Home/BrandsSection";
+import CtaSection from "../components/Home/CtaSection";
 
 const Home = () => {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true })
-  }, [])
+    AOS.init({ duration: 1000, once: true });
+  }, []);
 
   return (
     <>
@@ -32,7 +32,7 @@ const Home = () => {
         />
       </Helmet>
 
-      <main className="min-h-screen theme-transition">
+      <main className="min-h-screen theme-transition -mt-[64px] pt-[64px]">
         {/* Hero Section */}
         <HeroSection />
 
@@ -55,7 +55,7 @@ const Home = () => {
         <CtaSection />
       </main>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
